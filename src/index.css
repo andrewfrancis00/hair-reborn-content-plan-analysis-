@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-purple: #3B1C5A;
+  --color-brand-purple-light: #5A2A88;
+  --color-brand-salmon: #FF9E79;
+  --color-brand-salmon-light: #FFB89E;
+  --color-brand-bg: #F8F7FA;
+}
+
+body {
+  background-color: var(--color-brand-bg);
+}
+
+/* Global overrides for the tab cards to apply brand colors */
+main .bg-white.border-slate-200 {
+  border: none !important;
+  border-radius: 1.5rem !important;
+  box-shadow: 0 20px 40px -15px rgba(59, 28, 90, 0.08) !important;
+  background-color: #ffffff !important;
+}
+
+main .bg-white.border-slate-200 > .bg-slate-50 {
+  background: linear-gradient(to left, var(--color-brand-purple), var(--color-brand-purple-light)) !important;
+  border-bottom: none !important;
+  padding: 1.5rem 2.5rem !important;
+}
+
+main .bg-white.border-slate-200 > .bg-slate-50 h3 {
+  color: #ffffff !important;
+  font-size: 1.5rem !important;
+  letter-spacing: -0.025em !important;
+}
+
+main .bg-white.border-slate-200 > .bg-slate-50 p {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+main .bg-white.border-slate-200 > .p-6 {
+  padding: 2.5rem !important;
+}
+
+main pre {
+  color: #2D1B4E !important;
+  line-height: 2.2 !important;
+  font-size: 1.125rem !important;
+  background-color: rgba(255, 158, 121, 0.05) !important;
+  padding: 2rem !important;
+  border-radius: 1rem !important;
+  border: 1px solid rgba(255, 158, 121, 0.2) !important;
+  white-space: pre-wrap !important;
+  font-family: system-ui, -apple-system, sans-serif !important;
+  font-weight: 500 !important;
+}
+
+/* Specific overrides for Competitors tab */
+main .bg-indigo-50.border-indigo-100 {
+  background-color: rgba(255, 158, 121, 0.15) !important;
+  border-color: rgba(255, 158, 121, 0.3) !important;
+  border-bottom: none !important;
+}
+main .text-indigo-900 {
+  color: var(--color-brand-purple) !important;
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
