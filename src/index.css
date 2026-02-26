@@ -15,42 +15,84 @@ body {
 /* Global overrides for the tab cards to apply brand colors */
 main .bg-white.border-slate-200 {
   border: none !important;
-  border-radius: 1.5rem !important;
-  box-shadow: 0 20px 40px -15px rgba(59, 28, 90, 0.08) !important;
+  border-radius: 1rem !important;
+  box-shadow: 0 10px 30px -10px rgba(59, 28, 90, 0.08) !important;
   background-color: #ffffff !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  overflow: hidden !important;
+}
+
+@media (min-width: 1024px) {
+  main .bg-white.border-slate-200 {
+    border-radius: 1.5rem !important;
+  }
 }
 
 main .bg-white.border-slate-200 > .bg-slate-50 {
   background: linear-gradient(to left, var(--color-brand-purple), var(--color-brand-purple-light)) !important;
   border-bottom: none !important;
-  padding: 1.5rem 2.5rem !important;
+  padding: 1.25rem 1.5rem !important;
+}
+
+@media (min-width: 1024px) {
+  main .bg-white.border-slate-200 > .bg-slate-50 {
+    padding: 1.5rem 2.5rem !important;
+  }
 }
 
 main .bg-white.border-slate-200 > .bg-slate-50 h3 {
   color: #ffffff !important;
-  font-size: 1.5rem !important;
+  font-size: 1.25rem !important;
   letter-spacing: -0.025em !important;
+}
+
+@media (min-width: 1024px) {
+  main .bg-white.border-slate-200 > .bg-slate-50 h3 {
+    font-size: 1.5rem !important;
+  }
 }
 
 main .bg-white.border-slate-200 > .bg-slate-50 p {
   color: rgba(255, 255, 255, 0.8) !important;
 }
 
-main .bg-white.border-slate-200 > .p-6 {
-  padding: 2.5rem !important;
+main .bg-white.border-slate-200 > .p-6,
+main .bg-white.border-slate-200 > .p-8 {
+  padding: 1.25rem !important;
+}
+
+@media (min-width: 1024px) {
+  main .bg-white.border-slate-200 > .p-6,
+  main .bg-white.border-slate-200 > .p-8 {
+    padding: 2.5rem !important;
+  }
 }
 
 main pre {
   color: #2D1B4E !important;
-  line-height: 2.2 !important;
-  font-size: 1.125rem !important;
+  line-height: 1.8 !important;
+  font-size: 0.95rem !important;
   background-color: rgba(255, 158, 121, 0.05) !important;
-  padding: 2rem !important;
-  border-radius: 1rem !important;
+  padding: 1.25rem !important;
+  border-radius: 0.75rem !important;
   border: 1px solid rgba(255, 158, 121, 0.2) !important;
   white-space: pre-wrap !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
   font-family: system-ui, -apple-system, sans-serif !important;
   font-weight: 500 !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+@media (min-width: 1024px) {
+  main pre {
+    font-size: 1.125rem !important;
+    padding: 2rem !important;
+    line-height: 2.2 !important;
+    border-radius: 1rem !important;
+  }
 }
 
 /* Specific overrides for Competitors tab */

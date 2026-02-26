@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   List, TrendingUp, Award, DollarSign, Clapperboard, FlaskConical, Target, 
-  MessageSquareText, CalendarDays, Rocket, Crosshair, CheckSquare, Magnet
+  MessageSquareText, CalendarDays, Rocket, Crosshair, CheckSquare, Magnet, Menu, X
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import IndexTab from './tabs/IndexTab';
@@ -37,21 +37,53 @@ const TABS = [
 
 export default function App() {
   const [activeTab, setActiveTab] = useState(TABS[0].id);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Close mobile menu when tab changes
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [activeTab]);
 
   const activeTabObj = TABS.find(t => t.id === activeTab) || TABS[0];
   const ActiveComponent = activeTabObj.component;
 
   return (
     <div className="flex h-screen bg-[#F8F7FA] text-slate-900 font-sans selection:bg-[#FF9E79] selection:text-[#3B1C5A]" dir="rtl">
-      <div className="w-80 bg-[#3B1C5A] flex flex-col h-full shadow-2xl z-20 relative">
-        <div className="p-8 border-b border-white/10">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FF9E79] to-[#F4A261] flex items-center justify-center shadow-lg">
-              <span className="text-[#3B1C5A] font-bold text-xl">HR</span>
+      
+      {/* Mobile Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="fixed inset-0 bg-black/50 z-40 lg:hidden backdrop-blur-sm"
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Sidebar */}
+      <div className={cn(
+        "fixed inset-y-0 right-0 z-50 w-80 bg-[#3B1C5A] flex flex-col h-full shadow-2xl transition-transform duration-300 lg:relative lg:translate-x-0",
+        isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+      )}>
+        <div className="p-6 lg:p-8 border-b border-white/10 flex justify-between items-center">
+          <div>
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FF9E79] to-[#F4A261] flex items-center justify-center shadow-lg shrink-0">
+                <span className="text-[#3B1C5A] font-bold text-xl">HR</span>
+              </div>
+              <h1 className="text-xl lg:text-2xl font-bold text-white tracking-tight">Hair Reborn</h1>
             </div>
-            <h1 className="text-2xl font-bold text-white tracking-tight">Hair Reborn</h1>
+            <p className="text-xs lg:text-sm text-[#FFB89E] font-medium opacity-90">تحليل المنافسين والخطة التسويقية</p>
           </div>
-          <p className="text-sm text-[#FFB89E] font-medium opacity-90">تحليل المنافسين والخطة التسويقية</p>
+          <button 
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="lg:hidden p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+          >
+            <X className="w-6 h-6" />
+          </button>
         </div>
         <div className="flex-1 overflow-y-auto py-6 custom-scrollbar">
           <nav className="space-y-1.5 px-4">
@@ -86,21 +118,29 @@ export default function App() {
         </div>
       </div>
 
-      <div className="flex-1 overflow-hidden flex flex-col relative">
+      {/* Main Content */}
+      <div className="flex-1 overflow-hidden flex flex-col relative w-full">
+        {/* Decorative background elements */}
         <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-[#3B1C5A]/5 to-transparent pointer-events-none" />
         
-        <header className="bg-white/80 backdrop-blur-md border-b border-slate-200/50 px-10 py-6 shadow-sm z-10 sticky top-0">
-          <div className="flex items-center gap-4">
-            <div className="p-2.5 bg-[#FF9E79]/20 rounded-xl">
-              <activeTabObj.icon className="w-6 h-6 text-[#3B1C5A]" />
+        <header className="bg-white/80 backdrop-blur-md border-b border-slate-200/50 px-4 lg:px-10 py-4 lg:py-6 shadow-sm z-10 sticky top-0 flex items-center gap-4">
+          <button 
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="lg:hidden p-2 text-[#3B1C5A] hover:bg-[#FF9E79]/20 rounded-lg transition-colors shrink-0"
+          >
+            <Menu className="w-6 h-6" />
+          </button>
+          <div className="flex items-center gap-3 lg:gap-4 overflow-hidden">
+            <div className="p-2 lg:p-2.5 bg-[#FF9E79]/20 rounded-xl shrink-0">
+              <activeTabObj.icon className="w-5 h-5 lg:w-6 lg:h-6 text-[#3B1C5A]" />
             </div>
-            <h2 className="text-2xl font-bold text-[#3B1C5A]">
+            <h2 className="text-lg lg:text-2xl font-bold text-[#3B1C5A] truncate">
               {activeTabObj.label}
             </h2>
           </div>
         </header>
         
-        <main className="flex-1 overflow-y-auto p-10 relative z-0">
+        <main className="flex-1 overflow-y-auto p-4 lg:p-10 relative z-0">
           <div className="max-w-5xl mx-auto pb-20">
             <AnimatePresence mode="wait">
               <motion.div
